@@ -1,0 +1,39 @@
+services:
+    app:
+        build:
+            context: ./
+            target: builder
+        ports:
+            - '8080:80'
+        volumes:
+            - ./:/var/www/html
+        networks:
+            - lobdown
+
+
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - ./docker-compose-volumes/redis:/data
+        networks:
+            - lobdown
+
+    mariadb:
+        image: mariadb
+        ports:
+            - "3306:3306"
+        environment:
+            - MARIADB_ROOT_PASSWORD=lyan_pass
+            - MARIADB_ALLOW_EMPTY_PASSWORD=true
+            - MARIADB_USER=lyan_user
+            - MARIADB_PASSWORD=lyan_pass
+            - MARIADB_DATABASE=lyan_db
+        volumes:
+            - "./docker-compose-volumes/mariadb:/var/lib/mysql"
+        networks:
+            - lobdown
+
+networks:
+    lobdown: {}
