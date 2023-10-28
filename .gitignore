@@ -16,4 +16,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/docker-compose-volume/
+/docker-compose-volumes
