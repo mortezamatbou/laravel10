@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::share('title', 'Undefined Title');
+
+        DB::listen(function (QueryExecuted $query) {
+            // $query->connection->insert('INSERT INTO log_requests (route_name, uuid, time_add) VALUES (?, UUID(), ?)', [request()->path(), time()]);
+        });
+
     }
 }
