@@ -1,3 +1,4 @@
+USE lyan_db;
 
 CREATE TABLE my_users (
     id INT NOT NULL AUTO_INCREMENT,
