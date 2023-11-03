@@ -42,4 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+//    protected $dispatchesEvents = [
+//        'saved' => App\Events\UserSaved::class,
+//        'deleted' => App\Events\UserDeleted::class,
+//    ];
+
 }

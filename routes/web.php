@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyUsersController;
 use App\Http\Controllers\TestDbController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -16,6 +17,17 @@ use App\Http\Controllers\TestController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/model', [MyUsersController::class, 'index']);
+Route::get('/model/select', [MyUsersController::class, 'advanceSelect']);
+Route::get('/model/insert', [MyUsersController::class, 'insertNewUser']);
+Route::get('/model/state', [MyUsersController::class, 'checkState']);
+Route::get('/model/mass', [MyUsersController::class, 'massAssignment']);
+Route::get('/model/events', [MyUsersController::class, 'checkEvents']);
+Route::get('/model/my_users/{id}', function (string $id) {
+    return \App\Models\MyUsers::findOrFail($id);
+});
+
 
 Route::get('/db/test', [TestDbController::class, 'test_db']);
 Route::get('/db/chunk', [TestDbController::class, 'test_chunk']);
