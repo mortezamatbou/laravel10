@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoinsController;
 use App\Http\Controllers\MyUsersController;
 use App\Http\Controllers\TestDbController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,13 @@ Route::get('/model/my_users/{id}', function (string $id) {
     return \App\Models\MyUsers::findOrFail($id);
 });
 
+Route::get('/coins', [CoinsController::class, 'index'])->name('coins.index');
+
+Route::get('/coins/{id}', [CoinsController::class, 'detail'])->whereNumber('id')->name('coins.detail');
+Route::post('/coins/{id}', [CoinsController::class, 'coin_update'])->whereNumber('id')->name('coins.update');
+
+Route::get('/coins/add', [CoinsController::class, 'coin_add_form'])->name('coins.add.form');
+Route::post('/coins/add', [CoinsController::class, 'coin_add'])->name('coins.add');
 
 Route::get('/db/test', [TestDbController::class, 'test_db']);
 Route::get('/db/chunk', [TestDbController::class, 'test_chunk']);
