@@ -39,13 +39,13 @@ Route::get('/model/my_users/{id}', function (string $id) {
     return \App\Models\MyUsers::findOrFail($id);
 });
 
-Route::get('/coins', [CoinsController::class, 'index'])->name('coins.index');
-
-Route::get('/coins/{id}', [CoinsController::class, 'detail'])->whereNumber('id')->name('coins.detail');
-Route::post('/coins/{id}', [CoinsController::class, 'coin_update'])->whereNumber('id')->name('coins.update');
-
-Route::get('/coins/add', [CoinsController::class, 'coin_add_form'])->name('coins.add.form');
-Route::post('/coins/add', [CoinsController::class, 'coin_add'])->name('coins.add');
+Route::prefix('coins')->controller(CoinsController::class)->group(function () {
+    Route::get('/', 'index')->name('coins.index');
+    Route::get('/{id}', 'detail')->whereNumber('id')->name('coins.detail');
+    Route::post('/{id}', 'coin_update')->whereNumber('id')->name('coins.update');
+    Route::get('/add', 'coin_add_form')->name('coins.add.form');
+    Route::post('/add', 'coin_add')->name('coins.add');
+});
 
 Route::get('/db/test', [TestDbController::class, 'test_db']);
 Route::get('/db/chunk', [TestDbController::class, 'test_chunk']);
