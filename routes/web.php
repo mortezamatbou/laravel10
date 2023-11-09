@@ -28,16 +28,18 @@ Route::prefix('/entity')->controller(EntityTestsController::class)->group(functi
     Route::post('/add', 'store')->name('entity.store');
 });
 
-
-Route::get('/model', [MyUsersController::class, 'index']);
-Route::get('/model/select', [MyUsersController::class, 'advanceSelect']);
-Route::get('/model/insert', [MyUsersController::class, 'insertNewUser']);
-Route::get('/model/state', [MyUsersController::class, 'checkState']);
-Route::get('/model/mass', [MyUsersController::class, 'massAssignment']);
-Route::get('/model/events', [MyUsersController::class, 'checkEvents']);
-Route::get('/model/my_users/{id}', function (string $id) {
-    return \App\Models\MyUsers::findOrFail($id);
+Route::prefix('/model')->controller(MyUsersController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/select', 'advanceSelect');
+    Route::get('/insert', 'insertNewUser');
+    Route::get('/state', 'checkState');
+    Route::get('/mass', 'massAssignment');
+    Route::get('/events', 'checkEvents');
+    Route::get('/my_users/{id}', function (string $id) {
+        return \App\Models\MyUsers::findOrFail($id);
+    });
 });
+
 
 Route::prefix('coins')->controller(CoinsController::class)->group(function () {
     Route::get('/', 'index')->name('coins.index');
