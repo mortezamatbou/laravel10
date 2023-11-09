@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoinsController;
+use App\Http\Controllers\EntityTestsController;
 use App\Http\Controllers\MyUsersController;
 use App\Http\Controllers\TestDbController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,15 @@ use App\Http\Controllers\TestController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('/entity')->controller(EntityTestsController::class)->group(function () {
+    Route::get('/', 'index')->name('entity.index');
+    Route::get('/{id}', 'show')->whereNumber('id')->name('entity.detail');
+    Route::post('/{id}', 'update')->whereNumber('id')->name('entity.update');
+    Route::get('/add', 'store_form')->name('entity.store_form');
+    Route::post('/add', 'store')->name('entity.store');
+});
+
 
 Route::get('/model', [MyUsersController::class, 'index']);
 Route::get('/model/select', [MyUsersController::class, 'advanceSelect']);
