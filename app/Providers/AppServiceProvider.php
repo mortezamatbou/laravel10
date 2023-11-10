@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // MySQL 8.0 limits index keys to 1000 characters
+        Schema::defaultStringLength(125);
         View::share('title', 'Undefined Title');
 
         DB::listen(function (QueryExecuted $query) {
