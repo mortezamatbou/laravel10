@@ -3,6 +3,7 @@
 use App\Http\Controllers\CoinsController;
 use App\Http\Controllers\EntityTestsController;
 use App\Http\Controllers\MyUsersController;
+use App\Http\Controllers\PermissionTest;
 use App\Http\Controllers\TestDbController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -40,7 +41,6 @@ Route::prefix('/model')->controller(MyUsersController::class)->group(function ()
     });
 });
 
-
 Route::prefix('coins')->controller(CoinsController::class)->group(function () {
     Route::get('/', 'index')->name('coins.index');
     Route::get('/{id}', 'detail')->whereNumber('id')->name('coins.detail');
@@ -48,6 +48,18 @@ Route::prefix('coins')->controller(CoinsController::class)->group(function () {
     Route::get('/add', 'coin_add_form')->name('coins.add.form');
     Route::post('/add', 'coin_add')->name('coins.add');
 });
+
+Route::prefix('permission')->controller(PermissionTest::class)->group(function () {
+    Route::get('/', 'index')->name('permission.index');
+    Route::get('/user/add', 'user_add')->name('permission.user.add');
+    Route::post('/user/add', 'user_add')->name('permission.user.store');
+
+    Route::get('/permissions', 'permission_list')->name('permission.permissions');
+    Route::get('/roles', 'role_list')->name('permission.roles');
+
+    Route::get('/test', 'test')->name('permission.test');
+});
+
 
 Route::get('/db/test', [TestDbController::class, 'test_db']);
 Route::get('/db/chunk', [TestDbController::class, 'test_chunk']);
