@@ -123,3 +123,23 @@ Route::prefix('test')->group(function () {
 });
 
 Route::resource('photos', \App\Http\Controllers\PhotosController::class)->only(['show', 'create']);
+
+Route::get('/test', function() {
+    // faster than Permission::create([$attributes]);
+//    $permission = \Spatie\Permission\Models\Permission::make(['name' => 'test.permission']);
+//    $permission->saveOrFail();
+
+    // app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+    /**
+     * @var \Spatie\Permission\Models\Role $role
+     */
+    // $role = \Spatie\Permission\Models\Role::where('id', 3)->first();
+    // pre_print($role->hasPermissionTo('test.permission'), 'json'); // return true|false
+
+    // $permissions = \Spatie\Permission\Models\Permission::all();
+    // $role->syncPermissions($permissions);
+
+    $role = \Spatie\Permission\Models\Role::findByName('article-update');
+
+});
