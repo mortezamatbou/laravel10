@@ -25,8 +25,8 @@
             <ul>
                 @section('menu')
                     @auth('web')
-                        <li><a href="{{ route('coins.index') }}">Coins</a></li>
-                        <li><a href="{{ route('coins.add.form') }}">Add Coin</a></li>
+                        @can('list coins') <li><a href="{{ route('coins.index') }}">Coins</a></li> @endcan
+                        @can('add coins') <li><a href="{{ route('coins.add.form') }}">Add Coin</a></li> @endcan
                         <li><a href="{{ route('coins.logout') }}">Logout</a></li>
                     @else
                         <li><a href="{{ route('coins.login.form') }}">Login</a></li>
