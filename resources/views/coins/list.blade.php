@@ -20,7 +20,9 @@
                 <td>{{ $coin->id }}</td>
                 <td>{{ $coin->title }}</td>
                 <td>{{ $coin->symbol }}</td>
-                <td><a href="{{ route('coins.detail', $coin->id) }}" class="btn btn-sm btn-success">Detail</a></td>
+                <td>
+                    @can('detail coins') <a href="{{ route('coins.detail', $coin->id) }}" class="btn btn-sm btn-success">Detail</a> @endcan
+                </td>
             </tr>
         @endforeach
     </table>
