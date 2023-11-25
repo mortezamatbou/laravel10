@@ -41,12 +41,16 @@ Route::prefix('/model')->controller(MyUsersController::class)->group(function ()
     });
 });
 
-Route::prefix('coins')->controller(CoinsController::class)->group(function () {
-    Route::get('/', 'index')->name('coins.index');
-    Route::get('/{id}', 'detail')->whereNumber('id')->name('coins.detail');
-    Route::post('/{id}', 'coin_update')->whereNumber('id')->name('coins.update');
-    Route::get('/add', 'coin_add_form')->name('coins.add.form');
-    Route::post('/add', 'coin_add')->name('coins.add');
+Route::get('/coins/login', [CoinsController::class, 'login_form'])->name('coins.login.form');
+Route::get('/coins/login/success', [CoinsController::class, 'login_success'])->name('coins.login.success');
+Route::post('/coins/login', [CoinsController::class, 'login_check'])->name('coins.login');
+Route::prefix('coins')->middleware(['auth'])->controller(CoinsController::class)->group(function () {
+    Route::middleware('can:list coins')->get('/', 'index')->name('coins.index');
+    Route::middleware('can:detail coins')->get('/{id}', 'detail')->whereNumber('id')->name('coins.detail');
+    Route::middleware('can:edit coins')->post('/{id}', 'coin_update')->whereNumber('id')->name('coins.update');
+    Route::middleware('can:add coins')->get('/add', 'coin_add_form')->name('coins.add.form');
+    Route::middleware('can:add coins')->post('/add', 'coin_add')->name('coins.add');
+    Route::get('/logout', 'logout')->name('coins.logout');
 });
 
 Route::prefix('permission')->controller(PermissionTest::class)->group(function () {
