@@ -24,8 +24,13 @@
         <div class="col-12">
             <ul>
                 @section('menu')
-                    <li><a href="{{ route('coins.index') }}">Coins</a></li>
-                    <li><a href="{{ route('coins.add.form') }}">Add Coin</a></li>
+                    @auth('web')
+                        <li><a href="{{ route('coins.index') }}">Coins</a></li>
+                        <li><a href="{{ route('coins.add.form') }}">Add Coin</a></li>
+                        <li><a href="{{ route('coins.logout') }}">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('coins.login.form') }}">Login</a></li>
+                    @endauth
                 @show
             </ul>
             <hr>
