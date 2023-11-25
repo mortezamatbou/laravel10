@@ -28,9 +28,14 @@
             <label>Symbol</label>
             <input class="form-control" type="text" name="symbol" value="{{ old('symbol') }}">
         </div>
-        <div>
-            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-        </div>
+
+        @can('add coins')
+            <div>
+                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            </div>
+        @endcan
+
+
     </form>
 
 @endsection

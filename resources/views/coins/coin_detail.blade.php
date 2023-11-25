@@ -28,9 +28,11 @@
             <label>Symbol</label>
             <input class="form-control" type="text" name="symbol" value="{{ $coin->symbol }}" required>
         </div>
-        <div>
-            <button type="submit" class="btn btn-sm btn-success">Update</button>
-        </div>
+        @can('edit coins')
+            <div>
+                <button type="submit" class="btn btn-sm btn-success">Update</button>
+            </div>
+        @endcan
     </form>
 
 @endsection
