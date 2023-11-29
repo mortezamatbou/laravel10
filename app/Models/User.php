@@ -54,4 +54,15 @@ class User extends Authenticatable
 //        'deleted' => App\Events\UserDeleted::class,
 //    ];
 
+    /**
+     * Specifies the user's FCM token
+     *
+     * @return string|array
+     */
+    public function routeNotificationForFcm()
+    {
+        return $this->fcm_token;
+    }
+
+
 }
