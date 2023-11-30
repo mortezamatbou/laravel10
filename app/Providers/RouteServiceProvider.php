@@ -54,6 +54,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('notes')
                 ->group(base_path('routes/notes.php'));
 
+            Route::middleware('web')
+                ->prefix('fcm')
+                ->group(base_path('routes/fcm.php'));
+
         });
     }
 }
