@@ -66,5 +66,10 @@ class User extends Authenticatable
         return $this->fcm_token;
     }
 
+    public function routeNotificationForSlack(): string
+    {
+        Return '';
+    }
+
 
 }

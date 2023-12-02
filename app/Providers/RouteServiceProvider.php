@@ -58,6 +58,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('fcm')
                 ->group(base_path('routes/fcm.php'));
 
+            Route::middleware('web')
+                ->prefix('slack')
+                ->group(base_path('routes/slack.php'));
+
         });
     }
 }
